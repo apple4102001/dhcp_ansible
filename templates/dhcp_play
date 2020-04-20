@@ -1,6 +1,0 @@
----
-- hosts: dhcp_servers
-  become: yes
-  roles:
-    - dhcp
-  
