@@ -1,0 +1,40 @@
+---
+# tasks file for dhcp
+- name: download dhcp
+  yum:
+    name: dhcp-server
+    state: present
+- name: configure interface
+  template: 
+    src: /etc/ansible/templates/dhcpd.sysconfig
+    dest: /etc/sysconfig/dhcpd
+- name: configure static ip address
+  template:
+    src: /etc/ansible/templates/interface-conf
+    dest: "/etc/sysconfig/network-scripts/ifcfg-{{ interface }}"
+    mode: '0644'
+- name: restart NetworkManager
+  service:
+    name: NetworkManager
+    state: restarted
+- name: configure dhcp.conf
+  template:
+    src: /etc/ansible/templates/dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+    mode: '0644'
+- name: restart dhcpd service
+  service:
+    name: dhcpd
+    state: restarted
+    enabled: yes
+- name: permit dhcpd service
+  firewalld:
+    service: dhcp
+    permanent: yes
+    state: enabled
+- name: reload firewalld
+  service:
+    name: firewalld
+    state: restarted
+
+
