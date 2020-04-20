@@ -1,0 +1,15 @@
+---
+# vars file for dhcp
+interface: enp0s10
+conn_name: enp0s10
+uuid: 38c3e55d-3be5-48d2-af31-225083adb3a1
+ipaddr: 192.168.70.20
+prefix: 24
+gateway: 192.168.70.1
+subnet: 192.168.70.0
+netmask: 255.255.255.0
+routers: 192.168.70.1
+broadcast: 192.168.70.255
+range: 192.168.70.40 192.168.70.80
+dns_servers: 8.8.8.8
+
